@@ -1,0 +1,21 @@
+Parameters:
+function RecombineSimMaturation(eventfile,varfile,folder,genotype,threshold,samples,mode,COratio,failure,preweight,mapfile,smoothing,express,alpha,beta)
+
+eventfile - Tab-delimited table specifying meiotic CO/NCO events, per chromosome, per genotype, see: Event_Tables for examples
+varfile - Tab-delimited table specifying SNPs/INDELs for the appropriate strain cross, see: VariantAnalysis/VariantTable_SK1.txt or VariantTable_YUM.txt for examples
+folder - A path or foldername to store output
+genotype - Genotype to simulate
+threshold - Data subset to use based on the merging threshold (listed in the eventfile)
+samples - Number of samples to simulate
+mode - Mode of interference, options: 'Random' (no inteference), 'Hazard' (interference based on the gamma-distribution of the experimental data), 'UniHazard' (interference based on a user-defined gamma-distribution
+COratio - % of class II, non-intefering COs, e.g. '20' = 20%. 
+failure - Class I, intefering CO maturation failure rate, e.g. '10' = 10% of class I COs will fail to mature
+preweight - Pre-weight the CO distribution, options: 'Y' (yes) and 'N' (no)
+mapfile - Tab-delimited table specifying data to preweight CO formation, see: WeightMaps/CO_WeightMap, DSB_WeightMap or SK1_SNP_WeightMap for examples
+smoothing - Window size (in bp) to smooth the preweight map by, e.g. '20000' = 20000bp
+express - Skip or include NCO and Total simulations, options: 'Y' (skip), 'N'
+alpha - A vector specifying 3 gamma-alpha values for 'UniHazard' mode for NCOs, COs and Total (in that order), e.g. [3.5, 3.5, 3.5]
+beta - A vector specifying 3 gamma-beta values for 'UniHazard' mode for NCOs, COs and Total (in that order), e.g. [35000, 35000, 35000]
+
+Example:
+RecombineSimMaturation('MasterEventTable_1500_No_Annotation.txt','VariantTable_SK1.txt','PaperData','OM',1500,1000,'Random',0,0,'Y','SNP_WeightMap',2000,'N')
